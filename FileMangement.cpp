@@ -1,4 +1,6 @@
+#pragma once
 #include <iostream>
+#include <sys\stat.h>
 #include <direct.h>
 #include <dirent.h>
 #include "FileMangement.h"
@@ -10,13 +12,15 @@ FileMangement::FileMangement()
     strcpy(full_text, path);
     strcat(full_text, driveName);
     int folder = _mkdir(full_text);
+    string f = "\\";
+    strcat(full_text, f.c_str());
 }
-// Member functions
+// Member functionsentity = readdir(dir)
 char *FileMangement::getRootFolderAdress()
 {
     return this->full_text;
 }
-/* void FileMangement::NumOfEntity(string typeOfFile)
+void FileMangement::NumOfEntity()
 {
     DIR *dir = opendir(full_text);
     if (dir == NULL)
@@ -25,17 +29,26 @@ char *FileMangement::getRootFolderAdress()
         return;
     }
     struct dirent *entity;
-    entity = readdir(dir);
-    while (entity != NULL)
+    struct stat dataType;
+    for (entity = readdir(dir); entity != NULL; entity = readdir(dir))
     {
-        if (entity->d_namlen == 4)
+        string type = entity->d_name;
+        type = full_text + type;
+        if (stat(type.c_str(), &dataType) == 0)
         {
-            numOfFolder++;
+            if (dataType.st_mode & S_IFDIR)
+            {
+                type = "Folder";
+                numOfFolder++;
+            }
+            else if (dataType.st_mode & S_IFREG)
+            {
+                type = "File";
+                numOfFiles++;
+            }
         }
-        else if (entity->d_namlen == 8)
-        {
-            numOfFiles++;
-        }
-    };
+    }
     closedir(dir);
-} */
+    cout << "Number Of Folders: " << numOfFolder << endl;
+    cout << "Number Of Files: " << numOfFiles << endl;
+}
