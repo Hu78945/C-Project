@@ -1,14 +1,13 @@
 #pragma once
+#include "FileMangement.h"
 #include <iostream>
 #include <string.h>
 #include <direct.h>
 #include <dirent.h>
-#include "FileMangement.h"
 using namespace std;
 class Folder : public FileMangement
 {
 private:
-    /* data */
     char *folderName;
 
 public:
@@ -25,18 +24,15 @@ public:
         this->folderName = NewFolderPath;
         cout << "Folder have been created" << endl;
     };
-    void Remove()
+    void static Remove(char *folderName)
     {
-        try
-        {
-            _rmdir(this->folderName);
-            string err = "Error";
-            throw err;
-        }
-        catch (string err)
-        {
-            cerr << err;
-        }
+        FileMangement f1;
+        char *NewFolderPath = static_cast<char *>(malloc(strlen(folderName) + strlen(f1.getRootFolderAdress()) + 1));
+        strcpy(NewFolderPath, f1.getRootFolderAdress());
+        strcat(NewFolderPath, folderName);
+        string c = (string)NewFolderPath;
+        string a = "rmdir /s /q " + c;
+        system(a.c_str());
     }
     friend class File;
 };
