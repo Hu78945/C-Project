@@ -41,14 +41,6 @@ public:
         string c = (string)NewFolderPath;
         string a = "rmdir /s /q " + c;
         system(a.c_str());
-        // if (_rmdir(NewFolderPath) == -1)
-        // {
-        //     perror("Error");
-        // }
-        // else
-        // {
-        //     cout << "Filr HAVE BEEN DELTED" << endl;
-        // }
-    }
+        }
     friend class File;
 };

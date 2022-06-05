@@ -49,6 +49,6 @@ void FileMangement::NumOfEntity()
         }
     }
     closedir(dir);
-    cout << "Number Of Folders: " << numOfFolder << endl;
+    cout << "Number Of Folders: " << numOfFolder - 2 << endl;
     cout << "Number Of Files: " << numOfFiles << endl;
 }
