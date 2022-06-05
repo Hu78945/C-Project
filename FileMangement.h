@@ -7,7 +7,7 @@ using namespace std;
 class FileMangement
 {
 private:
-    char *path = (char *)"D:\\OOP\\Project\\";
+    char *path = (char *)"C:\\";
     char *driveName = (char *)"root";
     char *full_text = static_cast<char *>(malloc(strlen(path) + strlen(driveName) + 1));
     int numOfFolder = 0, numOfFiles = 0;
