@@ -1,5 +1,6 @@
 #pragma once
 #include "FileMangement.h"
+#include "File.h"
 #include <iostream>
 #include <string.h>
 #include <direct.h>
@@ -41,6 +42,5 @@ public:
         string c = (string)NewFolderPath;
         string a = "rmdir /s /q " + c;
         system(a.c_str());
-        }
-    friend class File;
+    }
 };
