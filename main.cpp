@@ -1,4 +1,4 @@
-#include "File.h"
+#include "Folder.h"
 #include <string>
 using namespace std;
 int main()
@@ -16,6 +16,8 @@ int main()
         cout << "Press 7 to read a file" << endl;
         cout << "Press 8 to clear data from a file" << endl;
         cout << "Press 9 to delte a file" << endl;
+        cout << "Press 10 to open a folder" << endl;
+        cout << "Press 11 to open folder menue" << endl;
         cout << "Press 0 to exoit the program" << endl;
         cout << "Enter Your Choice: ";
         cin >> choice;
@@ -102,6 +104,25 @@ int main()
             f1.RemoveFile(fileName);
             break;
         }
+        case 10:
+        {
+            system("cls");
+            string folderName;
+            cout << "Enter the folder Name you want to open" << endl;
+            cin >> folderName;
+            Folder::OpenFolder(folderName);
+            break;
+        }
+        case 11:
+        {
+            system("cls");
+            string folder;
+            cout << "Enter the folder name you want to open" << endl;
+            cin >> folder;
+            Folder::OpenFolder(folder);
+            break;
+        }
+
         case 0:
             cout << "Exting out of the program" << endl;
             ch = 0;
