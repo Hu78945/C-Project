@@ -7,6 +7,8 @@
 #include <dirent.h>
 #include <errno.h>
 #include <sys/stat.h>
+#include "Register.h"
+#include "Login.h"
 using namespace std;
 class Folder : public FileMangement
 {
@@ -74,7 +76,6 @@ public:
         strcat(NewFolderPath, folderName.c_str());
         string f = "\\";
         strcat(NewFolderPath, f.c_str());
-        cout << NewFolderPath << endl;
         // after opening the folder
 
         if (IsPathExist(NewFolderPath))
@@ -93,7 +94,7 @@ public:
                 cout << "Press 2 to delete a file" << endl;
                 cout << "Press 3 to write a file" << endl;
                 cout << "Press 4 to read a file" << endl;
-                cout << "Press 5 to clear a file" << endl;
+                cout << "Press 5 to clear you screen" << endl;
                 cout << "Press 99 to go back to main menue" << endl;
                 cout << "-----------------------------------------------" << endl;
                 cout << "Please Enter you choice :" << endl;

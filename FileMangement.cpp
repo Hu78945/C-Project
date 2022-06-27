@@ -9,8 +9,8 @@ using namespace std;
 // constructor
 FileMangement::FileMangement()
 {
-    strcpy(full_text, path);
-    strcat(full_text, driveName);
+    strcpy(full_text, path.c_str());
+    strcat(full_text, driveName.c_str());
     int folder = _mkdir(full_text);
     string f = "\\";
     strcat(full_text, f.c_str());
@@ -51,4 +51,8 @@ void FileMangement::NumOfEntity()
     closedir(dir);
     cout << "Number Of Folders: " << numOfFolder - 2 << endl;
     cout << "Number Of Files: " << numOfFiles << endl;
+}
+void FileMangement::setRootFolderAdress(string adress)
+{
+    strcpy(full_text, adress.c_str());
 }

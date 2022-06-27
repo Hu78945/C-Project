@@ -92,8 +92,16 @@ public:
         else
         {
             string file = path + fileName;
-            remove(file.c_str());
-            cout << "File have been deleted successfull." << endl;
+            int status = remove(file.c_str());
+            cout << file << endl;
+            if (status == 0)
+            {
+                cout << "File have been deleted successfull." << endl;
+            }
+            else
+            {
+                cout << "Unable to delte the file" << endl;
+            }
         }
     }
     // setter functions

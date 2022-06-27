@@ -10,7 +10,7 @@ int main()
         cout << "Press 1 to add a folder " << endl;
         cout << "Press 2 to delete a folder" << endl;
         cout << "Press 3 to get number of folder and files" << endl;
-        cout << "Press 4 to cleaer the screen" << endl;
+        cout << "Press 4 to content the screen" << endl;
         cout << "Press 5 to create a new file" << endl;
         cout << "Press 6 to write to a file" << endl;
         cout << "Press 7 to read a file" << endl;
@@ -18,6 +18,8 @@ int main()
         cout << "Press 9 to delte a file" << endl;
         cout << "Press 10 to open a folder" << endl;
         cout << "Press 11 to open folder menue" << endl;
+        cout << "Press 12 to register a user" << endl;
+        cout << "Press 13 to Login" << endl;
         cout << "Press 0 to exoit the program" << endl;
         cout << "Enter Your Choice: ";
         cin >> choice;
@@ -120,6 +122,28 @@ int main()
             cout << "Enter the folder name you want to open" << endl;
             cin >> folder;
             Folder::OpenFolder(folder);
+            break;
+        }
+        case 12:
+        {
+            system("cls");
+            string userName, password;
+            cout << "Enter username : " << endl;
+            cin >> userName;
+            cout << "Enter password: " << endl;
+            cin >> password;
+            Register r1(userName, password);
+            break;
+        }
+        case 13:
+        {
+            system("cls");
+            string username, password;
+            cout << "Enter username: " << endl;
+            cin >> username;
+            cout << "Enter passowrd: " << endl;
+            cin >> password;
+            Login li(username, password);
             break;
         }
 
