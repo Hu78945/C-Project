@@ -3,6 +3,48 @@
 using namespace std;
 int main()
 {
+    // make folder in the userFolder
+    string path = "C:\\root\\";
+    string username, password;
+
+    bool LoginStat = 1;
+    while (LoginStat)
+    {
+        cout << "Press 1 To Login" << endl;
+        cout << "Press 2 to register" << endl;
+        cout << "Plese enter your choice: " << endl;
+        int choice;
+        cin >> choice;
+        switch (choice)
+        {
+        case 1:
+        {
+            system("cls");
+            cout << "Enter username: " << endl;
+            cin >> username;
+            cout << "Enter passowrd: " << endl;
+            cin >> password;
+            Login li(username, password);
+            LoginStat = li.isLoggedIn;
+            break;
+        }
+        case 2:
+        {
+            system("cls");
+            cout << "Enter username : " << endl;
+            cin >> username;
+            cout << "Enter password: " << endl;
+            cin >> password;
+            Register r1(username, password);
+            break;
+        }
+        case 0:
+            cout << "Shutting down " << endl;
+            LoginStat = 0;
+        }
+    }
+    LoginStat == 0 ? path += username + "\\" : "";
+    //////////////////////////////////////////////////////////
     bool ch = 1;
     while (ch)
     {
@@ -17,9 +59,6 @@ int main()
         cout << "Press 8 to clear data from a file" << endl;
         cout << "Press 9 to delte a file" << endl;
         cout << "Press 10 to open a folder" << endl;
-        cout << "Press 11 to open folder menue" << endl;
-        cout << "Press 12 to register a user" << endl;
-        cout << "Press 13 to Login" << endl;
         cout << "Press 0 to exoit the program" << endl;
         cout << "Enter Your Choice: ";
         cin >> choice;
@@ -60,6 +99,7 @@ int main()
             cout << "Enter the fileName: " << endl;
             cin >> fileName;
             File f1;
+            f1.setPath(path);
             f1.CreateFile(fileName);
             break;
         }
@@ -73,6 +113,8 @@ int main()
             cin.ignore();
             getline(cin, fileContent, 'x');
             File f1;
+            f1.setPath(path);
+
             f1.WriteFile(fileName, fileContent);
             break;
         }
@@ -83,6 +125,8 @@ int main()
             cout << "Enter the file name which you want to read" << endl;
             cin >> fileName;
             File f1;
+            f1.setPath(path);
+
             f1.ReadFile(fileName);
             break;
         }
@@ -93,6 +137,8 @@ int main()
             cout << "Enter the file name which you want to clear" << endl;
             cin >> fileName;
             File f1;
+            f1.setPath(path);
+
             f1.ClearFile(fileName);
             break;
         }
@@ -103,6 +149,8 @@ int main()
             cout << "Enter the file name: " << endl;
             cin >> fileName;
             File f1;
+            f1.setPath(path);
+
             f1.RemoveFile(fileName);
             break;
         }
@@ -113,37 +161,6 @@ int main()
             cout << "Enter the folder Name you want to open" << endl;
             cin >> folderName;
             Folder::OpenFolder(folderName);
-            break;
-        }
-        case 11:
-        {
-            system("cls");
-            string folder;
-            cout << "Enter the folder name you want to open" << endl;
-            cin >> folder;
-            Folder::OpenFolder(folder);
-            break;
-        }
-        case 12:
-        {
-            system("cls");
-            string userName, password;
-            cout << "Enter username : " << endl;
-            cin >> userName;
-            cout << "Enter password: " << endl;
-            cin >> password;
-            Register r1(userName, password);
-            break;
-        }
-        case 13:
-        {
-            system("cls");
-            string username, password;
-            cout << "Enter username: " << endl;
-            cin >> username;
-            cout << "Enter passowrd: " << endl;
-            cin >> password;
-            Login li(username, password);
             break;
         }
 
