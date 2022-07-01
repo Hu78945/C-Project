@@ -13,6 +13,10 @@ FileMangement::FileMangement()
     strcat(full_text, driveName.c_str());
     int folder = _mkdir(full_text);
     string f = "\\";
+    string publicFolder = "C:\\root\\public";
+    int PFolder = _mkdir(publicFolder.c_str());
+    PFolder == 0 ? "Public Folder have been created" : "Failed to create the public folder";
+    strcpy(full_text, publicFolder.c_str());
     strcat(full_text, f.c_str());
 }
 // Member functionsentity = readdir(dir)

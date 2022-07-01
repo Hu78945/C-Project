@@ -9,16 +9,19 @@
 #include <sys/stat.h>
 #include "Register.h"
 #include "Login.h"
+#include "Protection.h"
+#include "FileOperation.h"
+#include "FolderOperation.h"
 using namespace std;
 class Folder : public FileMangement
 {
 private:
     char *folderName;
+    char *RootPath = FileMangement::getRootFolderAdress();
 
 public:
-    Folder(std::string folderName) : FileMangement()
+    void CreateFolder(string folderName)
     {
-        char *RootPath = FileMangement::getRootFolderAdress();
         char *NewFolderPath = static_cast<char *>(malloc(strlen(RootPath) + strlen(folderName.c_str()) + 1));
         strcpy(NewFolderPath, RootPath);
         strcat(NewFolderPath, folderName.c_str());
@@ -34,12 +37,12 @@ public:
             this->folderName = NewFolderPath;
             cout << "Folder have been created" << endl;
         }
-    };
-    void static Remove(std::string folderName)
+    }
+    void Remove(std::string folderName)
     {
-        FileMangement f1;
-        char *NewFolderPath = static_cast<char *>(malloc(strlen(folderName.c_str()) + strlen(f1.getRootFolderAdress()) + 1));
-        strcpy(NewFolderPath, f1.getRootFolderAdress());
+
+        char *NewFolderPath = static_cast<char *>(malloc(strlen(folderName.c_str()) + strlen(RootPath) + 1));
+        strcpy(NewFolderPath, RootPath);
         strcat(NewFolderPath, folderName.c_str());
         cout << NewFolderPath << endl;
         string c = (string)NewFolderPath;
@@ -68,11 +71,11 @@ public:
         }
     }
 
-    void static OpenFolder(std::string folderName)
+    void OpenFolder(std::string folderName)
     {
-        FileMangement f1;
-        char *NewFolderPath = static_cast<char *>(malloc(strlen(folderName.c_str()) + strlen(f1.getRootFolderAdress()) + 1));
-        strcpy(NewFolderPath, f1.getRootFolderAdress());
+
+        char *NewFolderPath = static_cast<char *>(malloc(strlen(folderName.c_str()) + strlen(RootPath) + 1));
+        strcpy(NewFolderPath, RootPath);
         strcat(NewFolderPath, folderName.c_str());
         string f = "\\";
         strcat(NewFolderPath, f.c_str());
@@ -161,5 +164,10 @@ public:
                 }
             }
         }
+    }
+
+    void SetRootPath(string path)
+    {
+        strcpy(RootPath, path.c_str());
     }
 };

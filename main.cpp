@@ -4,7 +4,7 @@ using namespace std;
 int main()
 {
     // make folder in the userFolder
-    string path = "C:\\root\\";
+    string path = "C:\\root\\Database\\";
     string username, password;
 
     bool LoginStat = 1;
@@ -59,6 +59,11 @@ int main()
         cout << "Press 8 to clear data from a file" << endl;
         cout << "Press 9 to delte a file" << endl;
         cout << "Press 10 to open a folder" << endl;
+        cout << "Press 11 to make a file public" << endl;
+        cout << "Press 12 to copy file to public" << endl;
+        cout << "Press 13 to rename a file" << endl;
+        cout << "Press 14 to make folder public " << endl;
+        cout << "Press 15 to rename a folder" << endl;
         cout << "Press 0 to exoit the program" << endl;
         cout << "Enter Your Choice: ";
         cin >> choice;
@@ -69,7 +74,19 @@ int main()
             std::string folderName;
             cout << "Enter folder name: ";
             cin >> folderName;
-            Folder f1(folderName);
+            Folder f1;
+            cout << "Do you want to make th folder public: (y/n)";
+            char choice;
+            cin >> choice;
+            if (choice == 'n')
+            {
+                f1.SetRootPath(path);
+                f1.CreateFolder(folderName);
+            }
+            else
+            {
+                f1.CreateFolder(folderName);
+            }
             cout << "Right back here" << endl;
             break;
         }
@@ -78,7 +95,19 @@ int main()
             string folder;
             cout << "Enter Folder Name: ";
             cin >> folder;
-            Folder::Remove(folder);
+            Folder f1;
+            cout << "Do you want to delete the folder public: (y/n)";
+            char choice;
+            cin >> choice;
+            if (choice == 'n')
+            {
+                f1.SetRootPath(path);
+                f1.Remove(folder);
+            }
+            else
+            {
+                f1.Remove(folder);
+            }
             break;
         }
         case 3:
@@ -99,8 +128,18 @@ int main()
             cout << "Enter the fileName: " << endl;
             cin >> fileName;
             File f1;
-            f1.setPath(path);
-            f1.CreateFile(fileName);
+            cout << "Do you want to make it public (y/n)" << endl;
+            char choice;
+            cin >> choice;
+            if (choice == 'n')
+            {
+                f1.setPath(path);
+                f1.CreateFile(fileName);
+            }
+            else
+            {
+                f1.CreateFile(fileName);
+            }
             break;
         }
         case 6:
@@ -113,9 +152,18 @@ int main()
             cin.ignore();
             getline(cin, fileContent, 'x');
             File f1;
-            f1.setPath(path);
-
-            f1.WriteFile(fileName, fileContent);
+            cout << "Do you want to make it public (y/n)" << endl;
+            char choice;
+            cin >> choice;
+            if (choice == 'n')
+            {
+                f1.setPath(path);
+                f1.WriteFile(fileName, fileContent);
+            }
+            else
+            {
+                f1.WriteFile(fileName, fileContent);
+            }
             break;
         }
         case 7:
@@ -125,9 +173,19 @@ int main()
             cout << "Enter the file name which you want to read" << endl;
             cin >> fileName;
             File f1;
-            f1.setPath(path);
+            cout << "Do you want to make it public (y/n)" << endl;
+            char choice;
+            cin >> choice;
+            if (choice == 'n')
+            {
 
-            f1.ReadFile(fileName);
+                f1.setPath(path);
+                f1.ReadFile(fileName);
+            }
+            else
+            {
+                f1.ReadFile(fileName);
+            }
             break;
         }
         case 8:
@@ -137,9 +195,19 @@ int main()
             cout << "Enter the file name which you want to clear" << endl;
             cin >> fileName;
             File f1;
-            f1.setPath(path);
+            cout << "Do you want to make it public (y/n)" << endl;
+            char choice;
+            cin >> choice;
+            if (choice == 'n')
+            {
 
-            f1.ClearFile(fileName);
+                f1.setPath(path);
+                f1.ClearFile(fileName);
+            }
+            else
+            {
+                f1.ClearFile(fileName);
+            }
             break;
         }
         case 9:
@@ -149,9 +217,19 @@ int main()
             cout << "Enter the file name: " << endl;
             cin >> fileName;
             File f1;
-            f1.setPath(path);
+            cout << "Do you want to delte it from public (y/n)" << endl;
+            char choice;
+            cin >> choice;
+            if (choice == 'n')
+            {
 
-            f1.RemoveFile(fileName);
+                f1.setPath(path);
+                f1.RemoveFile(fileName);
+            }
+            else
+            {
+                f1.RemoveFile(fileName);
+            }
             break;
         }
         case 10:
@@ -160,7 +238,74 @@ int main()
             string folderName;
             cout << "Enter the folder Name you want to open" << endl;
             cin >> folderName;
-            Folder::OpenFolder(folderName);
+            Folder f1;
+            cout << "Do you want to make th folder public: (y/n)";
+            char choice;
+            cin >> choice;
+            if (choice == 'n')
+            {
+                f1.SetRootPath(path);
+                f1.OpenFolder(folderName);
+            }
+            else
+            {
+
+                f1.OpenFolder(folderName);
+            }
+            break;
+        }
+        case 11:
+        {
+            system("cls");
+            cout << "Enter the file name which you want to public:" << endl;
+            string fileName;
+            cin >> fileName;
+            FileOperation p1(fileName, path);
+            p1.MakeFilePublic();
+            break;
+        }
+        case 12:
+        {
+            system("cls");
+            cout << "Enter the file name which you want to copy to public folder" << endl;
+            string fileName;
+            cin >> fileName;
+            FileOperation f1(fileName, path);
+            f1.CopyFileToPublic();
+            break;
+        }
+        case 13:
+        {
+            system("cls");
+            cout << "Enter the file which you want to rename" << endl;
+            string fileName;
+            cin >> fileName;
+            cout << "Enter the new name whoch you want ot give to your file" << endl;
+            string newName;
+            cin >> newName;
+            FileOperation f1(fileName, path);
+            f1.RenameFile(newName);
+            break;
+        }
+        case 14:
+        {
+            cout << "Enter the folder name which you want to make public" << endl;
+            string folderName;
+            cin >> folderName;
+            FolderOperation f1(folderName, path);
+            f1.MakeFolderPublic();
+            break;
+        }
+        case 15:
+        {
+            cout << "Enter the folder name which you want to rename" << endl;
+            string folderName;
+            cin >> folderName;
+            cout << "Enter the new Folder name" << endl;
+            string newName;
+            cin >> newName;
+            FolderOperation f1(folderName, path);
+            f1.RenameFolder(newName);
             break;
         }
 
