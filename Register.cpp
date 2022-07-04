@@ -40,7 +40,7 @@ void Register::CreateUserDrive()
 {
     FileMangement f1;
     string roothPath = f1.getRootFolderAdress();
-    string DBFolder = roothPath + "//" + "Database";
+    string DBFolder = "C:\\root\\Database";
     int dbFolder = _mkdir(DBFolder.c_str());
     dbFolder == 0 ? "Root folder have been created" : "Faild to create database";
     string driveName = userName;

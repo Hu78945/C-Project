@@ -8,10 +8,12 @@ int main()
     string username, password;
 
     bool LoginStat = 1;
-    while (LoginStat)
+    bool quit = 1;
+    while (quit)
     {
         cout << "Press 1 To Login" << endl;
         cout << "Press 2 to register" << endl;
+        cout << "Press 0 to Gust Mode" << endl;
         cout << "Plese enter your choice: " << endl;
         int choice;
         cin >> choice;
@@ -26,6 +28,7 @@ int main()
             cin >> password;
             Login li(username, password);
             LoginStat = li.isLoggedIn;
+            quit = 0;
             break;
         }
         case 2:
@@ -39,8 +42,9 @@ int main()
             break;
         }
         case 0:
-            cout << "Shutting down " << endl;
-            LoginStat = 0;
+            cout << "Opeing in the public mode " << endl;
+            quit = 0;
+            break;
         }
     }
     LoginStat == 0 ? path += username + "\\" : "";
@@ -71,44 +75,60 @@ int main()
         {
         case 1:
         {
-            std::string folderName;
-            cout << "Enter folder name: ";
-            cin >> folderName;
-            Folder f1;
-            cout << "Do you want to make th folder public: (y/n)";
-            char choice;
-            cin >> choice;
-            if (choice == 'n')
+            if (LoginStat == 0)
             {
-                f1.SetRootPath(path);
-                f1.CreateFolder(folderName);
+                string folderName;
+                cout << "Enter folder name: ";
+                cin >> folderName;
+                Folder f1;
+                cout << "Do you want to make th folder public: (y/n)";
+                char choice;
+                cin >> choice;
+                if (choice == 'n')
+                {
+                    f1.SetRootPath(path);
+                    f1.CreateFolder(folderName);
+                }
+                else
+                {
+                    f1.CreateFolder(folderName);
+                }
+                cout << "Right back here" << endl;
+                break;
             }
             else
             {
-                f1.CreateFolder(folderName);
+                cout << "Plese restart and login to do these operations" << endl;
+                break;
             }
-            cout << "Right back here" << endl;
-            break;
         }
         case 2:
         {
-            string folder;
-            cout << "Enter Folder Name: ";
-            cin >> folder;
-            Folder f1;
-            cout << "Do you want to delete the folder public: (y/n)";
-            char choice;
-            cin >> choice;
-            if (choice == 'n')
+            if (LoginStat == 0)
             {
-                f1.SetRootPath(path);
-                f1.Remove(folder);
+                string folder;
+                cout << "Enter Folder Name: ";
+                cin >> folder;
+                Folder f1;
+                cout << "Do you want to delete the folder public: (y/n)";
+                char choice;
+                cin >> choice;
+                if (choice == 'n')
+                {
+                    f1.SetRootPath(path);
+                    f1.Remove(folder);
+                }
+                else
+                {
+                    f1.Remove(folder);
+                }
+                break;
             }
             else
             {
-                f1.Remove(folder);
+                cout << "Plese restart and login to do these operations" << endl;
+                break;
             }
-            break;
         }
         case 3:
         {
@@ -124,47 +144,63 @@ int main()
         }
         case 5:
         {
-            string fileName;
-            cout << "Enter the fileName: " << endl;
-            cin >> fileName;
-            File f1;
-            cout << "Do you want to make it public (y/n)" << endl;
-            char choice;
-            cin >> choice;
-            if (choice == 'n')
+            if (LoginStat == 0)
             {
-                f1.setPath(path);
-                f1.CreateFile(fileName);
+                string fileName;
+                cout << "Enter the fileName: " << endl;
+                cin >> fileName;
+                File f1;
+                cout << "Do you want to make it public (y/n)" << endl;
+                char choice;
+                cin >> choice;
+                if (choice == 'n')
+                {
+                    f1.setPath(path);
+                    f1.CreateFile(fileName);
+                }
+                else
+                {
+                    f1.CreateFile(fileName);
+                }
+                break;
             }
             else
             {
-                f1.CreateFile(fileName);
+                cout << "Plese restart and login to do these operations" << endl;
+                break;
             }
-            break;
         }
         case 6:
         {
-            system("cls");
-            string fileName, fileContent;
-            cout << "Enter the file name which you want to write" << endl;
-            cin >> fileName;
-            cout << "Enter the contet you want to write in the file" << endl;
-            cin.ignore();
-            getline(cin, fileContent, 'x');
-            File f1;
-            cout << "Do you want to make it public (y/n)" << endl;
-            char choice;
-            cin >> choice;
-            if (choice == 'n')
+            if (LoginStat == 0)
             {
-                f1.setPath(path);
-                f1.WriteFile(fileName, fileContent);
+                system("cls");
+                string fileName, fileContent;
+                cout << "Enter the file name which you want to write" << endl;
+                cin >> fileName;
+                cout << "Enter the contet you want to write in the file" << endl;
+                cin.ignore();
+                getline(cin, fileContent, 'x');
+                File f1;
+                cout << "Do you want to make it public (y/n)" << endl;
+                char choice;
+                cin >> choice;
+                if (choice == 'n')
+                {
+                    f1.setPath(path);
+                    f1.WriteFile(fileName, fileContent);
+                }
+                else
+                {
+                    f1.WriteFile(fileName, fileContent);
+                }
+                break;
             }
             else
             {
-                f1.WriteFile(fileName, fileContent);
+                cout << "Plese restart and login to do these operations" << endl;
+                break;
             }
-            break;
         }
         case 7:
         {
@@ -173,140 +209,213 @@ int main()
             cout << "Enter the file name which you want to read" << endl;
             cin >> fileName;
             File f1;
-            cout << "Do you want to make it public (y/n)" << endl;
-            char choice;
-            cin >> choice;
-            if (choice == 'n')
+            if (LoginStat == 0)
             {
+                cout << "Do you want to make it public (y/n)" << endl;
+                char choice;
+                cin >> choice;
+                if (choice == 'n')
+                {
 
-                f1.setPath(path);
-                f1.ReadFile(fileName);
+                    f1.setPath(path);
+                    f1.ReadFile(fileName);
+                }
+                else
+                {
+                    f1.ReadFile(fileName);
+                }
+                break;
             }
             else
             {
                 f1.ReadFile(fileName);
+                break;
             }
-            break;
         }
         case 8:
         {
-            system("cls");
-            string fileName;
-            cout << "Enter the file name which you want to clear" << endl;
-            cin >> fileName;
-            File f1;
-            cout << "Do you want to make it public (y/n)" << endl;
-            char choice;
-            cin >> choice;
-            if (choice == 'n')
+            if (LoginStat == 0)
             {
+                system("cls");
+                string fileName;
+                cout << "Enter the file name which you want to clear" << endl;
+                cin >> fileName;
+                File f1;
+                cout << "Do you want to make it public (y/n)" << endl;
+                char choice;
+                cin >> choice;
+                if (choice == 'n')
+                {
 
-                f1.setPath(path);
-                f1.ClearFile(fileName);
+                    f1.setPath(path);
+                    f1.ClearFile(fileName);
+                }
+                else
+                {
+                    f1.ClearFile(fileName);
+                }
+                break;
             }
             else
             {
-                f1.ClearFile(fileName);
+                cout << "Plese restart and login to do these operations" << endl;
+                break;
             }
-            break;
         }
         case 9:
         {
-            system("cls");
-            string fileName;
-            cout << "Enter the file name: " << endl;
-            cin >> fileName;
-            File f1;
-            cout << "Do you want to delte it from public (y/n)" << endl;
-            char choice;
-            cin >> choice;
-            if (choice == 'n')
+            if (LoginStat == 0)
             {
+                system("cls");
+                string fileName;
+                cout << "Enter the file name: " << endl;
+                cin >> fileName;
+                File f1;
+                cout << "Do you want to delte it from public (y/n)" << endl;
+                char choice;
+                cin >> choice;
+                if (choice == 'n')
+                {
 
-                f1.setPath(path);
-                f1.RemoveFile(fileName);
+                    f1.setPath(path);
+                    f1.RemoveFile(fileName);
+                }
+                else
+                {
+                    f1.RemoveFile(fileName);
+                }
+                break;
             }
             else
             {
-                f1.RemoveFile(fileName);
+                cout << "Plese restart and login to do these operations" << endl;
+                break;
             }
-            break;
         }
         case 10:
         {
-            system("cls");
-            string folderName;
-            cout << "Enter the folder Name you want to open" << endl;
-            cin >> folderName;
-            Folder f1;
-            cout << "Do you want to make th folder public: (y/n)";
-            char choice;
-            cin >> choice;
-            if (choice == 'n')
+            if (LoginStat == 0)
             {
-                f1.SetRootPath(path);
-                f1.OpenFolder(folderName);
+                system("cls");
+                string folderName;
+                cout << "Enter the folder Name you want to open" << endl;
+                cin >> folderName;
+                Folder f1;
+
+                cout << "Do you want to make th folder public: (y/n)";
+                char choice;
+                cin >> choice;
+                if (choice == 'n')
+                {
+                    f1.SetRootPath(path);
+                    f1.OpenFolder(folderName);
+                }
+                else
+                {
+
+                    f1.OpenFolder(folderName);
+                }
+                break;
             }
             else
             {
-
-                f1.OpenFolder(folderName);
+                cout << "Please login to do that operation" << endl;
+                break;
             }
-            break;
         }
         case 11:
         {
-            system("cls");
-            cout << "Enter the file name which you want to public:" << endl;
-            string fileName;
-            cin >> fileName;
-            FileOperation p1(fileName, path);
-            p1.MakeFilePublic();
-            break;
+            if (LoginStat == 0)
+            {
+                system("cls");
+                cout << "Enter the file name which you want to public:" << endl;
+                string fileName;
+                cin >> fileName;
+                FileOperation p1(fileName, path);
+                p1.MakeFilePublic();
+                break;
+            }
+            else
+            {
+                cout << "Plese restart and login to do these operations" << endl;
+                break;
+            }
         }
         case 12:
         {
-            system("cls");
-            cout << "Enter the file name which you want to copy to public folder" << endl;
-            string fileName;
-            cin >> fileName;
-            FileOperation f1(fileName, path);
-            f1.CopyFileToPublic();
-            break;
+            if (LoginStat == 0)
+            {
+                system("cls");
+                cout << "Enter the file name which you want to copy to public folder" << endl;
+                string fileName;
+                cin >> fileName;
+                FileOperation f1(fileName, path);
+                f1.CopyFileToPublic();
+                break;
+            }
+            else
+            {
+                cout << "Plese restart and login to do these operations" << endl;
+                break;
+            }
         }
         case 13:
         {
-            system("cls");
-            cout << "Enter the file which you want to rename" << endl;
-            string fileName;
-            cin >> fileName;
-            cout << "Enter the new name whoch you want ot give to your file" << endl;
-            string newName;
-            cin >> newName;
-            FileOperation f1(fileName, path);
-            f1.RenameFile(newName);
-            break;
+            if (LoginStat == 0)
+            {
+                system("cls");
+                cout << "Enter the file which you want to rename" << endl;
+                string fileName;
+                cin >> fileName;
+                cout << "Enter the new name whoch you want ot give to your file" << endl;
+                string newName;
+                cin >> newName;
+                FileOperation f1(fileName, path);
+                f1.RenameFile(newName);
+                break;
+            }
+            else
+            {
+                cout << "Plese restart and login to do these operations" << endl;
+                break;
+            }
         }
         case 14:
         {
-            cout << "Enter the folder name which you want to make public" << endl;
-            string folderName;
-            cin >> folderName;
-            FolderOperation f1(folderName, path);
-            f1.MakeFolderPublic();
-            break;
+            if (LoginStat == 0)
+            {
+                cout << "Enter the folder name which you want to make public" << endl;
+                string folderName;
+                cin >> folderName;
+                FolderOperation f1(folderName, path);
+                f1.MakeFolderPublic();
+                break;
+            }
+            else
+            {
+                cout << "Plese restart and login to do these operations" << endl;
+                break;
+            }
         }
         case 15:
         {
-            cout << "Enter the folder name which you want to rename" << endl;
-            string folderName;
-            cin >> folderName;
-            cout << "Enter the new Folder name" << endl;
-            string newName;
-            cin >> newName;
-            FolderOperation f1(folderName, path);
-            f1.RenameFolder(newName);
-            break;
+            if (LoginStat == 0)
+            {
+                cout << "Enter the folder name which you want to rename" << endl;
+                string folderName;
+                cin >> folderName;
+                cout << "Enter the new Folder name" << endl;
+                string newName;
+                cin >> newName;
+                FolderOperation f1(folderName, path);
+                f1.RenameFolder(newName);
+                break;
+            }
+            else
+            {
+                cout << "Plese restart and login to do these operations" << endl;
+                break;
+            }
         }
 
         case 0:

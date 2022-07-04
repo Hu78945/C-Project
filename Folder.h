@@ -56,7 +56,7 @@ public:
         DIR *dir = opendir(folder.c_str());
         if (dir)
         {
-            /* Directory exists. */
+            /* Directory exists.  */
             closedir(dir);
             return 0;
         }
@@ -91,6 +91,7 @@ public:
             int choice;
             while (che)
             {
+                // implemt 11 , 12, 13 from main.cpp into this files
                 cout << "Now you are in " << NewFolderPath << endl;
                 cout << "-----------------------------------------------" << endl;
                 cout << "Press 1 to create a file" << endl;
